@@ -1,3 +1,48 @@
+## `.bash_profile`
+
+```sh
+export NVM_DIR="$HOME/.nvm"
+
+. "/usr/local/opt/nvm/nvm.sh"
+
+parse_git_branch() {
+		git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+export PS1="\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\]\n$ "
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+if [ -f ~/.git-completion.bash ]; then
+	. ~/.git-completion.bash
+fi
+
+eval "$(direnv hook bash)"
+
+export LSCOLORS="EHfxcxdxBxegecabagacad"
+alias ll="ls -lGaf"
+alias gst="git status"
+alias init-soxhub="python3.7 ~/workspace/python-scripts/init-soxhub.py"
+alias rm-swp="find . -type f -name \".*.swp\" -exec rm -f {} \\;"
+alias ls-swp="find . -type f -name \".*.swp\""
+alias shsource="source ~/.bash_profile"
+alias shedit="vim ~/.bash_profile"
+
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+HISTSIZE=""
+
+fortune | pokemonsay
+
+alias tmux="TERM=screen-256color-bce tmux"
+
+export PATH="$HOME/.cargo/bin:$PATH"
+
+#echo "lock your computer" > "$HOME/Desktop/$(date)_read.txt"
+```
+
+## Install macvim
+
+`brew install macvim --with-override-system-vim`
+
+## `.vimrc`
+
 ```vim
 execute pathogen#infect()
 syntax on
